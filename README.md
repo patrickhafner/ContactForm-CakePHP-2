@@ -1,5 +1,11 @@
 #Contact form for CakePHP 2
 
+##features
+* multi language
+* no tables needed
+* custom routes
+* validation
+
 ## installation
 * clone github repository into your CakePHP Application plugin folder
 * add following code into your Config/email.php and configure:
@@ -20,6 +26,4 @@ public $contactform = array(
 $email->config('YOURCONFIG_IN_EMAIL_PHP');
 ```
 
-* test contact form with following url: 
-
-```http://yourapp.com/contact```
+* test contact form with following url: **http://yourapp.com/contact**
