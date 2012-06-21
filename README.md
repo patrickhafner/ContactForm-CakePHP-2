@@ -7,7 +7,12 @@
 * validation
 
 ## installation
-* clone github repository into your CakePHP Application plugin folder
+* clone github repository into your CakePHP Application plugin folder:
+
+```bash
+git clone https://github.com/patrickhafner/ContactForm-CakePHP-2.git Plugin/Contactform
+```
+
 * add following code into your Config/email.php and configure:
 
 ```php
