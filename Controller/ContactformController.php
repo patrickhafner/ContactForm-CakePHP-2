@@ -4,15 +4,15 @@ App::uses('CakeEmail', 'Network/Email');
 App::uses('Sanitize', 'Utility');
 
 class ContactformController extends AppController {
-    
+
     public $helpers = array('Form');
-    public $components = array('Email');
+    public $components = array('Email', 'Auth');
 
     public $uses = array('Contactform.Contactform');
 
     public function beforeFilter() {
 	parent::beforeFilter();
-	$this->Auth->allow('*');
+	$this->Auth->allow('show');
 	$this->cacheAction = false;
     }
 
