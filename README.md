@@ -32,6 +32,7 @@ $email->config('YOURCONFIG_IN_EMAIL_PHP');
 ```
 
 * add following code in {APP_DIR}/Config/bootstrap.php
+
 ```php
 CakePlugin::load('Contactform', array('routes' => true));
 ```
