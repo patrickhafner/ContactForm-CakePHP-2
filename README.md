@@ -31,4 +31,14 @@ public $contactform = array(
 $email->config('YOURCONFIG_IN_EMAIL_PHP');
 ```
 
-* test contact form with following url: **http://yourapp.com/contact**
+* add following code in {APP_DIR}/Config/bootstrap.php
+```php
+CakePlugin::load('Contactform', array('routes' => true));
+```
+
+or use this code to load all plugins, located in your application
+```php
+CakePlugin::loadAll(); // Loads all plugins at once
+```
+
+* test contact form with following url: **http://yourapp.example.com/contact**
