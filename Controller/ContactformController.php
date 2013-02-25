@@ -6,7 +6,7 @@ App::uses('Sanitize', 'Utility');
 class ContactformController extends AppController {
 
     public $helpers = array('Form');
-    public $components = array('Email', 'Auth');
+    public $components = array('Email', 'Auth', 'Session');
 
     public $uses = array('Contactform.Contactform');
 
@@ -17,6 +17,9 @@ class ContactformController extends AppController {
     }
 
     public function show() {
+    
+    $calc = $this->calculateSpamCheck();
+    
 	if($this->request->is('post')) {
 	    $email = new CakeEmail();
 	    try {
@@ -25,6 +28,8 @@ class ContactformController extends AppController {
     	    echo 'Config in email.php not found';
     	    exit;
 	    }
+	    
+	    if(intval($this->request->data['Contactform']['Spamprotection']) == $this->Session->read('Contactform.spamcalc')) {
 
 	    $this->Contactform->set($this->request->data['Contactform']);
 
@@ -44,13 +49,29 @@ class ContactformController extends AppController {
 
 		$this->Session->setFlash(__d('contactform', 'contact form was submitted successfully'), '', array('status' => 'success'));
 		$this->redirect('/');
+		}
 	    } else {
 		// throw errors from model
 	    }
 
 	}
-
+	
 	$this->set('title_for_layout', __d('contactform', 'contact form'));
     }
+    
+    private function calculateSpamCheck() {
+		$rand1 = rand(1,10);
+		$rand2 = rand(1,10);
+		
+		$this->set('Contactform.calculation', $rand1 . ' + ' . $rand2);
+		
+		$result = $rand1+$rand2;
+		
+		$this->Session->write('Contactform.spamcalc', $result);
+		
+		return $result;
+	}
+
+	
 
 }
