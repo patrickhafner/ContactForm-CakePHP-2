@@ -68,7 +68,7 @@ CakePlugin::loadAll(); // Loads all plugins at once
 
 ## todo
 
-* create mail template
+~* create mail template~
 
 ##license
 MIT license

@@ -39,7 +39,7 @@ class ContactformController extends AppController {
             if ($this->Contactform->validates()) {
                 $data = $this->request->data['Contactform'];
 
-                $email->template('Contactform.contactform', 'Contactform.default')
+                $email->template('Contactform.contactform', 'Contactform.cflayout')
                       ->emailFormat('text')
                       ->viewVars(array('data' => $data))
                       ->to(Sanitize::clean($data['Mail']))
