@@ -68,6 +68,7 @@ CakePlugin::loadAll(); // Loads all plugins at once
 
 ##license
 MIT license
+
 You are free to use this contact form plugin in commercial projects as long as the copyright header is left intact.
 
 Copyright (C) 2013 Patrick Hafner <dev@patrickhafner.de>
