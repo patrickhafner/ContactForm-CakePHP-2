@@ -1,3 +1,14 @@
+<?php
+/**
+ * ContactForm for CakePHP 2.x
+ *
+ * Copyright 2012-2013 by Patrick Hafner (http://patrickhafner.de)
+ *
+ * Licensed under The MIT License
+ * Redistributions of files must retain the above copyright notice.
+ *
+ */
+?>
 <h1>Kontaktformular</h1>
 <?php
  echo $this->Html->css(array(
@@ -8,8 +19,8 @@ echo $this->Form->create('Contactform.Contactform');
 echo $this->Form->input('Contactform.Name', array('label' => __d('contactform', 'name')));
 echo $this->Form->input('Contactform.Mail', array('label' => __d('contactform', 'email')));
 echo $this->Form->input('Contactform.Message', array('type' => 'textarea', 'label' => __d('contactform', 'message')));
-echo $this->Form->label('Contactform.Spamprotection', 'Spamschutz - '.$calculation);
-echo $this->Form->input('Contactform.Spamprotection', array('label' => false));
+echo $this->Form->label('Contactform.Spamprotection', __d('contactform', 'spam protection').' - '.$calculation);
+echo $this->Form->input('Contactform.Spamprotection', array('label' => false, 'autocomplete' => 'off'));
 
 echo $this->Form->submit('Absenden', array('label' => __d('contactform', 'submit')));
 

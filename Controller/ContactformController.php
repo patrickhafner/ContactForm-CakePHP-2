@@ -1,5 +1,14 @@
 <?php
-
+/**
+ * ContactForm for CakePHP 2.x
+ *
+ * Copyright 2012-2013 by Patrick Hafner (http://patrickhafner.de)
+ *
+ * Licensed under The MIT License
+ * Redistributions of files must retain the above copyright notice.
+ *
+ */
+ 
 App::uses('CakeEmail', 'Network/Email');
 App::uses('Sanitize', 'Utility');
 
@@ -18,8 +27,6 @@ class ContactformController extends AppController {
 
     public function show() {
     
-    $calc = $this->calculateSpamCheck();
-    
 	if($this->request->is('post')) {
 	    $email = new CakeEmail();
 	    try {
@@ -27,12 +34,10 @@ class ContactformController extends AppController {
 	    } catch(Exception $e) {
     	    echo 'Config in email.php not found';
     	    exit;
-	    }
-	    
-	    if(intval($this->request->data['Contactform']['Spamprotection']) == $this->Session->read('Contactform.spamcalc')) {
+	    }   
 
 	    $this->Contactform->set($this->request->data['Contactform']);
-
+	    
 	    if($this->Contactform->validates()) {
 		$data = $this->request->data['Contactform'];
 
@@ -42,7 +47,7 @@ class ContactformController extends AppController {
 			  __d('contactform', 'name').': '.Sanitize::clean($data['Name'])."\n".
 			  __d('contactform', 'email').': '.Sanitize::clean($data['Mail'])."\n\n".
 			  __d('contactform', 'message').":\n".
-			  Sanitize::html($data['Message'])."\n\n".
+			  Sanitize::stripAll($data['Message'])."\n\n".
 			  "----------------------------\n".
 			  __d('contactform', 'sent from').' '.Router::url('/', true)
 		    );
@@ -50,11 +55,11 @@ class ContactformController extends AppController {
 		$this->Session->setFlash(__d('contactform', 'contact form was submitted successfully'), '', array('status' => 'success'));
 		$this->redirect('/');
 		}
-	    } else {
-		// throw errors from model
-	    }
+	    
 
 	}
+	
+	$this->calculateSpamCheck();
 	
 	$this->set('title_for_layout', __d('contactform', 'contact form'));
     }
@@ -63,7 +68,7 @@ class ContactformController extends AppController {
 		$rand1 = rand(1,10);
 		$rand2 = rand(1,10);
 		
-		$this->set('Contactform.calculation', $rand1 . ' + ' . $rand2);
+		$this->set('calculation', $rand1 . ' + ' . $rand2);
 		
 		$result = $rand1+$rand2;
 		
