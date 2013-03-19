@@ -31,8 +31,7 @@ class ContactformController extends AppController {
             try {
                 $email->config('contactform');
             } catch (Exception $e) {
-die();
-#Throw new ConfigureException('Config in email.php not found. ' . $e->getMessage());
+                Throw new ConfigureException('Config in email.php not found. ' . $e->getMessage());
             }
 
             $this->Contactform->set($this->request->data['Contactform']);
@@ -40,7 +39,7 @@ die();
             if ($this->Contactform->validates()) {
                 $data = $this->request->data['Contactform'];
 
-                $email->template('Contactform.contactform')
+                $email->template('Contactform.contactform', 'Contactform.default')
                       ->emailFormat('text')
                       ->viewVars(array('data' => $data))
                       ->to(Sanitize::clean($data['Mail']))
