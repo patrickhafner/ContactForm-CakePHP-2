@@ -66,6 +66,10 @@ CakePlugin::loadAll(); // Loads all plugins at once
 ##screenshot
 ![screenshot](https://raw.github.com/patrickhafner/ContactForm-CakePHP-2/master/screenshot.png)
 
+## todo
+
+* create mail template
+
 ##license
 MIT license
 
